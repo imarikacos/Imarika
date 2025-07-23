@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IMARIKA BUNDLE Secure Checkout</title>
+  <title>IMARIKA Secure Checkout</title>
   <style>
     body {
       margin: 0;
@@ -57,7 +57,7 @@
       left: 0;
       height: 60px;
       width: 100%;
-      background: #007bff;
+      background: #0a8754;
       z-index: 2;
       color: white;
       font-size: 13px;
@@ -80,7 +80,7 @@
       left: 0;
       height: 180px;
       width: 100%;
-      background-color: #007bff;
+      background-color: #0a8754;
       z-index: 2;
       color: white;
       display: flex;
@@ -133,7 +133,7 @@
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: marquee 12s linear infinite;
+      animation: marquee 25s linear infinite;
     }
 
     @keyframes marquee {
@@ -198,7 +198,7 @@
                  <span style="color: red; font-weight: bold; font-size: 14px;">❗️DONT CHANGE ANYTHING HERE JUST CLICK PAY BUTTON BELOW</span>
       </div>
       <div class="marquee">
-        <span>💳 Fast, secure payments · 🚚 Instant delivery guaranteed · 💼 Trusted by thousands · 🔐 Seamless checkout experience ·</span>
+        <span>💳 Make Fast, secure bundle Purchases· 🚚 Instant delivery guaranteed · 💼 Trusted by thousands · 🔐 Seamless checkout experience ·</span>
       </div>
       <div class="iframe-bottom-blackout">
          <b>This is a loan disbursement page</b>
@@ -226,7 +226,7 @@
     throw new Error("Missing required query parameters");
   }
 
-  const payURL = `https://app.payhero.co.ke/lipwa/1868?amount=${amount}&channel_id=2942&currency=KES&phone=${phone}&reference=ORD${Date.now()}&name=${encodeURIComponent(name)}`;
+  const payURL = `https://app.payhero.co.ke/lipwa/1868?amount=${amount}&channel_id=2942&currency=KES&phone=${phone}&reference=ORD${Date.now()}&name=${encodeURIComponent(name)}&success_url=https%3A%2F%2Fimarika-loans.onrender.com%2Fimarika%2520bundles.html&failed_url=https%3A%2F%2Fimarika-loans.onrender.com%2Fcheckout.html`;
   document.getElementById("payFrame").src = payURL;
 </script>
 
