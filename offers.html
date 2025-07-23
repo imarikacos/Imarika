@@ -249,7 +249,7 @@ body.menu-open{ overflow:hidden; }
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const names = ["Samuel L", "Jane M", "Kevin O", "Mercy K", "Peter N", "Lucy A", "Brian T", "Faith W", "George M", "Emily N", "Chris K", "Ann O", "David B", "Joyce J", "Michael M", "Diana C", "Allan S", "Irene M", "Victor L", "Rose W", "Daniel K", "Esther G", "Tony W", "Sandra M", "Felix O", "Nancy K", "Elvis T", "Rachel N", "Dennis O", "Beatrice A"];
+  const names = ["Samuel M", "Jane M", "Kevin O", "Mercy K", "Peter N", "Lucy A", "Brian T", "Faith W", "George M", "Emily N", "Chris K", "Ann O", "David B", "Joyce J", "Michael M", "Diana C", "Allan S", "Irene M", "Victor L", "Rose W", "Daniel K", "Esther G", "Tony W", "Sandra M", "Felix O", "Nancy K", "Elvis T", "Rachel N", "Dennis O", "Beatrice A"];
   const amounts = [1500, 2500, 3000, 4500, 6000, 8000, 12000, 15000, 20000];
   const reasons = ["school fees", "medical", "rent", "shopping", "business", "farming", "emergency", "utility bill", "travel", "wedding"];
 
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!lastLogin || now - parseInt(lastLogin) > maxAge) {
     window.location.href = "login.html";
-  } 
+  }
 
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <svg fill="#225AAC" height="20" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"></path>
 </svg>
-<strong style="color:#225AAC;">Loan Amount:</strong>
+<strong style="color:#225AAC;">LOAN AMOUNT:</strong>
 <span id="modalLoanAmount" style="color:#225AAC; font-weight:600; margin-left:4px;">KES 0</span>
 </div>
 <div style="background: #fff3f3; padding: 12px 16px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function () {
     1.79-4 4-4s4 1.79 4 4c0 .88-.36 
     1.68-.93 2.25z"></path>
 </svg>
-<strong style="color:#d9534f;">Fees:</strong>
+<strong style="color:#d9534f;">FEES:</strong>
 <span id="modalFee" style="color:#d9534f; font-weight:bold; margin-left:4px;">KES 0</span>
 <a class="explain-fee-link" href="#" style="color: #007bff; font-size: 13px; text-decoration: underline;">(why we ask for fees)</a>
 </div>
@@ -533,8 +533,8 @@ document.addEventListener('DOMContentLoaded', function () {
     22 5.42 22 8.5c0 3.78-3.4 
     6.86-8.55 11.54L12 21.35z"></path>
 </svg>
-<strong style="color:#28a745;">Net Amount:</strong>
-<span id="modalNetAmount" style="color:#28a745; font-weight:bold; margin-left:4px;">KES 0</span>
+<strong style="color:#28a745;">AMOUNT TO RECEIVE</strong>
+<span id="modalNetAmount" style="color:#FFD700; font-weight:bold; margin-left:4px;">KES 0</span>
 </div>
 <p style=" font-weight: 600; font-size: 15px; margin-bottom: 8px; color: #d9534f; font-weight: bold;">
           ✅ This loan will be disbursed to your M-PESA number once confirmed.
