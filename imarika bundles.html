@@ -452,7 +452,6 @@ const offerDiscounts = [
 </script>
 <div class="promo-banner">
   ✨ <strong>WELCOME:</strong>.Get 10% off the week EVEN IF YOU HAVE OKOA JAHAZI OR NOT
-  <a href="#offer">Purchase below→</a>
 </div>
 <div class="topbar">
 <div class="logo">
@@ -691,7 +690,7 @@ const offerDiscounts = [
 </br></div>
 <div id="payStatusMessage" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; padding:10px; margin-bottom:12px; font-size:14px; border-radius:6px; display:none;">
   📡 Kindly wait while we process your payment and selected bundle...<br>
-  📲 You will receive an <strong>M-PESA STK Push From SASAPAY TRUST</strong> shortly. Please confirm the payment on your phone.
+  📲 You will be redirected to<strong>PAYMENT CONFIRMATION PAGE</strong> shortly. Please PAY(M-pesa) button in confirmation page and confirm the payment on your phone.
 </br></div>
 <div style="display:flex; gap:10px;">
 <button onclick="handleReturnToShop()" style="flex:1; background:#FFC200; color:black; border:none; padding:10px; border-radius:6px; font-weight:bold;"><svg fill="black" height="16" style="vertical-align: middle; margin-right: 6px;" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M10 19l-7-7 7-7v14zm-5-7h16v2H5z"></path></svg> Return to Shop</button>
@@ -699,7 +698,7 @@ const offerDiscounts = [
 </div>
 <div style="margin-top:16px; font-size:13px; color:#333;">
 <strong style="color: #FFC200;">📌 How to Pay:</strong><br>
-      After clicking <b><svg fill="#fff" height="16" style="vertical-align: middle; margin-right: 6px;" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h7v2H4z"></path></svg>Pay Now</b>, you'll receive a secure M-Pesa STK Push prompt on your phone. Complete the payment to proceed.
+      After clicking <b><svg fill="#fff" height="16" style="vertical-align: middle; margin-right: 6px;" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h7v2H4z"></path></svg>Pay(mpesa) button in confirmation page</b>, you'll receive a secure M-Pesa STK Push prompt on your phone. Complete the payment to proceed.
 
       <br><br><strong>🚚 How You'll Receive the Bundles:</strong><br>
       The bundle will be sent directly to the number you entered above within 1–3 minutes after successful payment.
@@ -772,7 +771,7 @@ async function payNow() {
 
   payBtn.innerHTML = `<span class="spinner" style="border: 2px solid #fff; border-top: 2px solid #ccc; border-radius: 50%; width: 16px; height: 16px; display: inline-block; animation: spin 1s linear infinite;"></span> Processing...`;
   payBtn.disabled = true;
-  msgBox.innerText = "📡 Redirecting to confirmation page...";
+  msgBox.innerText = "📡 please wait a moment while we Redirect to bundle confirmation page...";
   msgBox.style.display = "block";
 
   setTimeout(() => {
@@ -892,6 +891,16 @@ document.querySelectorAll(".card").forEach((card, index) => {
     { number: "07*****432", bundle: "25GB Daily", time: "2 minutes ago" },
     { number: "2547***654", bundle: "5GB (4 Days)", time: "3 minutes ago" },
     { number: "07*****900", bundle: "35GB Monthly", time: "4 minutes ago" }
+    { number: "07*****500", bundle: "10GB + 600 MIN", time: "just now" },
+    { number: "2547***100", bundle: "15GB Combo", time: "8 minute ago" },
+    { number: "07*****932", bundle: "25GB Daily", time: "2 minutes ago" },
+    { number: "2547***054", bundle: "5GB (4 Days)", time: "3 minutes ago" },
+    { number: "07*****000", bundle: "35GB Monthly", time: "8 minutes ago" }
+    { number: "07*****129", bundle: "10GB + 600 MIN", time: "just now" },
+    { number: "2547***654", bundle: "15GB Combo", time: "6 minute ago" },
+    { number: "07*****332", bundle: "25GB Daily", time: "7 minutes ago" },
+    { number: "2547***954", bundle: "5GB (4 Days)", time: "9 minutes ago" },
+    { number: "07*****600", bundle: "35GB Monthly", time: "4 minutes ago" }
   ];
 
   function showLiveNotification() {
