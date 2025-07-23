@@ -502,9 +502,9 @@ s0.parentNode.insertBefore(s1,s0);
     const now = Date.now();
     const maxAge = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-    */if (!lastLogin || now - parseInt(lastLogin) > maxAge) {
+    if (!lastLogin || now - parseInt(lastLogin) > maxAge) {
   window.location.href = "login.html";
-}/*
+}
   });
 </script>
 <!-- Firebase SDKs -->
