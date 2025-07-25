@@ -194,7 +194,7 @@
 </path>
 </svg>
 </div>
-<div style="background-color: #FFF9E5; border-left: 4px solid #FFC107; padding: 1rem; margin: 1rem 0; border-radius: 8px; color: #333; text-align: center;">Welcome to Imarika Empowerment Loans! Get quick, secure access to funds for your needs. <strong>Register now</strong> to start your journey.</div>
+<div style="background-color: #FFF9E5; border-left: 4px solid #FFC107; padding: 1rem; margin: 1rem 0; border-radius: 8px; color: #333; text-align: center;">Welcome to Imarika Empowerment Loans! Get quick, secure access to funds for your needs. <strong>Register now</strong> to start your journey.<div style="color: red; font-weight: bold; margin-top: 0.75rem;">❗️ Only one account per user. Creating multiple accounts may result in 🔒 lockout.</div></div>
 <h2>
     Register
    </h2>
@@ -215,6 +215,8 @@
 <button class="btn" type="submit">
      Register
     </button>
+<div style="text-align: center; margin: 1rem 0;">OR</div>
+<button class="btn" onclick="signInWithGoogle()" type="button"><img alt="Google logo" height="20" src="https://img.icons8.com/color/48/000000/google-logo.png" style="vertical-align: middle; border-radius: 50%; margin-right: 8px;" width="20"/><span>Continue with Google<span style="background-color: red; color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 8px; vertical-align: middle;">NEW</span></span></button>
 <div class="spinner" id="registerSpinner"><div></div></div>
 </form>
 <div class="link" onclick="showForm('login')">
@@ -254,6 +256,8 @@
 <button class="btn" type="submit">
      Log In
     </button>
+<div style="text-align: center; margin: 1rem 0;">OR</div>
+<button class="btn" onclick="signInWithGoogle()" type="button"><img alt="Google logo" height="20" src="https://img.icons8.com/color/48/000000/google-logo.png" style="vertical-align: middle; border-radius: 50%; margin-right: 8px;" width="20"/><span>Continue with Google<span style="background-color: red; color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 8px; vertical-align: middle;">NEW</span></span></button>
 <div class="spinner" id="loginSpinner"><div></div></div>
 </form>
 <div class="link" onclick="showForm('register')">
@@ -274,17 +278,23 @@
 </div>
 <div style="background-color: #FFF9E5; border-left: 4px solid #FFC107; padding: 1rem; margin: 1rem 0; border-radius: 8px; color: #333; text-align: center;">No worries! Forgot your password? We’re here to help. <strong>Follow the steps below</strong> to reset it quickly.</div>
 <h2>Forgot Password</h2>
-<p style="text-align: center; margin-bottom: 1.5rem; color: #333;">
-    Forgot your password? Tap the button below to contact support via WhatsApp.
-  </p>
-<a href="https://wa.me/254799439770?text=Hello%20support%20I%20forgot my %20password%20please%20check%20for%20me" style="text-decoration: none;" target="_blank">
-<button class="btn" style="background-color: #FFC107; color: #000;">
-      💬 Chat on WhatsApp
-    </button>
-</a>
+<p style="text-align: center; margin-bottom: 1.5rem; color: #333;">Enter your email to receive password reset instructions.</p>
+<form method="POST">
+<div class="form-group">
+<label for="resetEmail">Email</label>
+<input id="resetEmail" name="email" required="" type="email"/>
+</div>
+<button class="btn" type="submit">Send Password Reset Email<span style="background-color: red; color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 8px; vertical-align: middle;">NEW</span></button>
+</form>
 <div class="link" onclick="showForm('login')">
     Back to Login
   </div>
+<div style="text-align: center; margin-top: 1rem;">
+<p style="margin-bottom: 0.5rem; color: #333;">Having trouble?</p>
+<a href="https://wa.me/254799439770?text=Hello%20support%20I%20forgot%20my%20password%20please%20check%20for%20me" style="text-decoration: none;" target="_blank">
+<button class="btn" style="background-color: #25D366; color: white;">💬 Chat on WhatsApp</button>
+</a>
+</div>
 </div>
 <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: -1rem; margin-bottom: 2rem; font-size: 0.95rem; color: #225AAC;">
 <svg fill="none" height="20" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
@@ -764,5 +774,76 @@ function togglePassword(inputId, btn) {
     }
   });
 </script>
+<div id="updateNotice" style="display:none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #d4edda; color: #155724; padding: 1rem 2rem; border: 1px solid #c3e6cb; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); z-index: 1000; font-weight: bold; font-size: 0.95rem; text-align: center;">
+        📢 Please update your app for the best experience!
+              (reset password and google login/register updated)
+        <div style="margin-top: 10px;">
+<a href="https://old.appsgeyser.com/building/?type=apk&amp;widget_name=Imarika%20Loan%20App_18969377" style="text-decoration: none;" target="_blank">
+<button style="margin-top: 6px; padding: 6px 14px; background-color: #225AAC; color: white; border: none; border-radius: 6px; cursor: pointer;">
+              🔄 Update now
+            </button>
+</a>
+</div>
+</div>
+
+
+<script>
+  function showUpdateNotice() {
+    const notice = document.getElementById("updateNotice");
+    if (notice) {
+      notice.style.display = "block";
+      setTimeout(() => {
+        notice.style.display = "none";
+      }, 4000);
+    }
+  }
+
+  const originalShowForm = window.showForm;
+  window.showForm = function(form) {
+    originalShowForm(form);
+    if (form === "login") {
+      setTimeout(showUpdateNotice, 500);
+    }
+  }
+</script>
 </body>
 </html>
+<script>
+  function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        localStorage.setItem("imarika_last_login", Date.now().toString());
+        showDropdown("Google login successful! Redirecting...", "success");
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2000);
+      })
+      .catch((error) => {
+        showDropdown("Google login failed: " + error.message, "error");
+      });
+  }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const forgotForm = document.querySelector("#forgotForm form");
+  if (forgotForm) {
+    forgotForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const email = document.querySelector("#forgotForm input[name='email']");
+      const emailVal = email.value.trim();
+      if (!emailVal) {
+        showDropdown("Please enter your email address.", "error");
+        return;
+      }
+      try {
+        await firebase.auth().sendPasswordResetEmail(emailVal);
+        showDropdown("Password reset email sent! Check your inbox.", "success");
+      } catch (error) {
+        showDropdown("Error: " + error.message, "error");
+      }
+    });
+  }
+});
+</script>
