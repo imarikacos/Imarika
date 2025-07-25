@@ -200,14 +200,14 @@
    </h2>
 <form action="/register" method="POST">
 <div class="form-group">
-<label for="regEmail"> Email 《required》 </label>
+<label for="regEmail"> Email -required </label>
 <input id="regEmail" name="email" required="" type="text"/>
 <span class="error" style="color:red;font-size:0.8rem;">
 </span>
 </div>
 <div class="form-group">
 <label for="regPassword">
-      Create a secure and strong Password 《strong password 》
+      Create a secure and strong Password -strong password 
      </label>
 <span class="error" style="color:red;font-size:0.8rem;">
 </span>
@@ -241,14 +241,14 @@
    </h2>
 <form action="/login" method="POST">
 <div class="form-group">
-<label for="logEmail"> Email 《registered email》</label>
+<label for="logEmail"> Email -registered email</label>
 <input id="logEmail" name="email" required="" type="text"/>
 <span class="error" style="color:red;font-size:0.8rem;">
 </span>
 </div>
 <div class="form-group">
 <label for="logPassword">
-      Password 《registered password 》
+      Password -registered password 
      </label>
 <span class="error" style="color:red;font-size:0.8rem;">
 </span>
@@ -774,9 +774,8 @@ function togglePassword(inputId, btn) {
     }
   });
 </script>
-<div id="updateNotice" style="display:none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #d4edda; color: #155724; padding: 1rem 2rem; border: 1px solid #c3e6cb; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); z-index: 1000; font-weight: bold; font-size: 0.95rem; text-align: center;">
+<div id="updateNotice" style="display:none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #c8f1db; color: #155724; padding: 1rem 2rem; border: 1px solid #c3e6cb; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); z-index: 1000; font-weight: bold; font-size: 0.95rem; text-align: center;">
         📢 Please update your app for the best experience!
-              (reset password and google login/register updated)
         <div style="margin-top: 10px;">
 <a href="https://old.appsgeyser.com/building/?type=apk&amp;widget_name=Imarika%20Loan%20App_18969377" style="text-decoration: none;" target="_blank">
 <button style="margin-top: 6px; padding: 6px 14px; background-color: #225AAC; color: white; border: none; border-radius: 6px; cursor: pointer;">
@@ -806,6 +805,88 @@ function togglePassword(inputId, btn) {
     }
   }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  firebase.auth().onAuthStateChanged(user => {
+    const hasSeenMessage = sessionStorage.getItem("shownInAppMessage");
+    if (!hasSeenMessage) {
+      sessionStorage.setItem("shownInAppMessage", "yes");
+      if (!user) {
+        Swal.fire({
+          title: "Welcome to Imarika Empowerment Loans!",
+          text: "Register now to access your dashboard and start your loan journey.Ensure youre a new member.we track multipleaccounts using our system",
+          icon: "info",
+          confirmButtonText: "Register Now",
+          cancelButtonText: "Back",
+          showCancelButton: true,
+          background: "#f0fff4"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            showForm("register");
+          }
+        });
+      }
+    }
+  });
+
+  // Intercept login to show welcome message before redirect
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector("#loginForm form");
+    const loginSpinner = document.getElementById("loginSpinner");
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("logEmail").value.trim();
+      const password = document.getElementById("logPassword").value;
+      loginSpinner.style.display = "block";
+
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password);
+        Swal.fire({
+          title: "Welcome back!",
+          text: `Hello ${firebase.auth().currentUser.email}, you're now logged in; ip:protected Location:Kenya 🇰🇪 `,
+          icon: "success",
+          confirmButtonText: "Proceed to Dashboard"
+        }).then(() => {
+          window.location.href = "index.html";
+        });
+      } catch (error) {
+        showDropdown(error.message, "error");
+      } finally {
+        loginSpinner.style.display = "none";
+      }
+    });
+  });
+
+  // Intercept forgot password submission
+  document.addEventListener("DOMContentLoaded", function () {
+    const forgotForm = document.querySelector("#forgotForm form");
+    if (forgotForm) {
+      forgotForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = document.querySelector("#forgotForm input[name='email']");
+        const emailVal = email.value.trim();
+        if (!emailVal) {
+          showDropdown("Please enter your email address.", "error");
+          return;
+        }
+        try {
+          await firebase.auth().sendPasswordResetEmail(emailVal);
+          Swal.fire({
+            title: "Forgot Password?",
+            text: "Don't worry, we'll help you reset it. Please check your email inbox from noreply@imarikaweb.firebaseapp.com to reset your password.",
+            icon: "info",
+            confirmButtonText: "Understood"
+          });
+        } catch (error) {
+          showDropdown("Error: " + error.message, "error");
+        }
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
 <script>
