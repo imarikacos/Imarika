@@ -184,10 +184,6 @@
 </style>
     
     
-
-<link rel="icon" type="image/png" sizes="32x32" href="imarika logo.png">
-<link rel="apple-touch-icon" href="imarika logo.png">
-<meta name="msapplication-TileImage" content="imarika logo.png">
 </head>
 
 <header style="width:100%; padding: 1rem 0; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: center;">
@@ -233,7 +229,7 @@
 
     <div style="margin-top:1rem;">
       <label>Your referral link:</label>
-      <input type="text" id="refLink" value="https://imarikaweb.com/register.html?ref=kipkoech302" readonly onclick="this.select()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:6px;">
+      <input type="text" id="refLink" value="https://shorturl.asia/ay1cE ?ref=imarika302" readonly onclick="this.select()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:6px;">
       <button onclick="copyRefLink()" class="btn">📋 Copy Link</button>
     </div>
 
@@ -283,13 +279,13 @@
         }
 
         if (todayEarned >= 200) {
-          showToast("🚫 Daily referral limit reached.");
+          showToast("🚫 Daily referral limit reached come back tomorrow.");
           return;
         }
 
         localStorage.setItem("lastShareTime", now.toString());
 
-        const link = "https://imarikaweb.com/register.html?ref=kipkoech302";
+        const link = "https://shorturl.asia/ay1cE ?ref=imarika302";
         const message = "Join Imarika Loans and earn KES 50 per friend! 🚀 Tap to register 👉 " + link;
         const waUrl = "https://wa.me/?text=" + encodeURIComponent(message);
         window.location.href = waUrl;
