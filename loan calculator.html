@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imarika Empowerment Loan Calculations</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fb;
+      color: #333;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #FFECB3;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid #225AAC;
+      position: relative;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #225AAC;
+      font-size: 20px;
+    }
+
+    .close-button {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      font-weight: bold;
+      color: #225AAC;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .calculator {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      color: #225AAC;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .value {
+      font-weight: bold;
+      color: #225AAC;
+    }
+
+    .results {
+      margin-top: 15px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .results p {
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .results svg {
+      width: 18px;
+      height: 18px;
+      fill: #225AAC;
+    }
+
+    canvas {
+      display: block;
+      max-width: 300px;
+      margin: 20px auto;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .action-button {
+      background: #FFD700;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .action-button svg {
+      width: 20px;
+      height: 20px;
+      fill: #333;
+    }
+
+    #amortizationSection {
+      margin-top: 30px;
+    }
+
+    #amortizationTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    #amortizationTable th, #amortizationTable td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: right;
+    }
+
+    #amortizationTable th {
+      background-color: #FFECB3;
+      color: #225AAC;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      background: #f1f1f1;
+      color: #444;
+    }
+
+    @media print {
+      .button-group,
+      .close-button {
+        display: none;
+      }
+    }
+
+    @keyframes escapeUpAndBack {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .animate-escape {
+      animation: escapeUpAndBack 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="index.html" class="close-button">×</a>
+    <h1>Imarika Loan Calculations</h1>
+  </div>
+
+  <div class="calculator">
+    <p class="value">Generated on: <span id="timestamp" class="scroll-number">--</span></p>
+
+    <label for="loanAmount">Loan Amount:</label>
+    <input type="range" id="loanAmount" min="1000" max="1000000" step="1000" value="1000" />
+    <p class="value">KES <span id="amountDisplay" class="scroll-number">1,000</span></p>
+
+    <div class="results">
+      <p><svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14z"/><path d="M13 7h-2v2h2V7zm0 4h-2v6h2v-6z"/></svg>
+         <strong>Monthly Rate:</strong> 0.86%</p>
+      <p><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+         <strong>Net Amount (You Receive):</strong> KES <span id="netAmount" class="scroll-number">1,000</span></p>
+      <p><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.012 11.012 0 0 0 12 1zm1 17h-2v-2h2zm0-4h-2V7h2z"/></svg>
+         <strong>Duration:</strong> <span id="duration" class="scroll-number">1 month</span></p>
+    </div>
+
+    <canvas id="loanChart"></canvas>
+
+    <div id="amortizationSection">
+      <h3 style="color: #225AAC;">Amortization Schedule</h3>
+      <table id="amortizationTable">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Payment</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="button-group">
+      <a class="action-button" href="eligibility.html">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14v2H5zm0 4h14v2H5zm0-8h14v2H5z"/></svg>
+        Apply Now
+      </a>
+      <button class="action-button" onclick="printPDF()">
+        <svg viewBox="0 0 24 24"><path d="M19 8h-1V3H6v5H5c-1.1 0-2 .9-2 2v7h5v4h10v-4h5v-7c0-1.1-.9-2-2-2zM8 5h8v3H8V5zm8 14H8v-5h8v5z"/></svg>
+        Print
+      </button>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Imarika Empowerment. All rights reserved.
+  </div>
+
+  <script>
+    const slider = document.getElementById('loanAmount');
+    const amountDisplay = document.getElementById('amountDisplay');
+    const netAmount = document.getElementById('netAmount');
+    const duration = document.getElementById('duration');
+    const ctx = document.getElementById('loanChart').getContext('2d');
+    let chart;
+
+    function getDuration(value) {
+      if (value <= 10000) return 1;
+      if (value <= 50000) return 3;
+      if (value <= 100000) return 6;
+      if (value <= 250000) return 9;
+      if (value <= 500000) return 12;
+      return 18;
+    }
+
+    function updateValues() {
+      const value = parseInt(slider.value);
+      const interest = value * 0.0086;
+      const hiddenFees = value * 0.03;
+      const disbursed = value - interest - hiddenFees;
+
+      amountDisplay.textContent = value.toLocaleString();
+      netAmount.textContent = disbursed.toLocaleString(undefined, { maximumFractionDigits: 2 });
+
+      const months = getDuration(value);
+      duration.textContent = months + " month" + (months > 1 ? "s" : "");
+
+      buildAmortizationSchedule(value, 0.0086, months);
+      updateChart(value, interest);
+    }
+
+    function updateChart(value, interest) {
+      const principal = value - interest;
+      const data = [principal, interest];
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Net Amount (You Receive)', 'Interest (0.86%)'],
+          datasets: [{
+            data,
+            backgroundColor: ['#225AAC', '#FFB84D'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
+
+    function buildAmortizationSchedule(loanAmount, monthlyRate, months) {
+      const tableBody = document.querySelector('#amortizationTable tbody');
+      tableBody.innerHTML = '';
+
+      const monthlyPayment = loanAmount * (1 + monthlyRate) / months;
+      let balance = loanAmount;
+
+      for (let i = 1; i <= months; i++) {
+        const interest = balance * monthlyRate;
+        const principal = monthlyPayment - interest;
+        balance -= principal;
+
+        tableBody.innerHTML += `
+          <tr>
+            <td>${i}</td>
+            <td>KES ${monthlyPayment.toFixed(2)}</td>
+            <td>KES ${principal.toFixed(2)}</td>
+            <td>KES ${interest.toFixed(2)}</td>
+            <td>KES ${balance > 0 ? balance.toFixed(2) : '0.00'}</td>
+          </tr>
+        `;
+      }
+    }
+
+    slider.addEventListener('input', updateValues);
+    updateValues();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.classList.remove('animate-escape');
+          void el.offsetWidth;
+          el.classList.add('animate-escape');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.scroll-number').forEach(el => {
+      observer.observe(el);
+    });
+
+    function updateDateTime() {
+      const now = new Date();
+      const formatted = now.toLocaleString('en-KE', {
+        dateStyle: 'full',
+        timeStyle: 'medium',
+        hour12: false
+      });
+      document.getElementById('timestamp').textContent = formatted;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    function printPDF() {
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/[:.]/g, '-');
+      const fileName = `loan-calculation-${timestamp}`;
+      document.title = fileName;
+      window.print();
+      document.title = 'Imarika Empowerment Loan Calculations';
+    }
+  </script>
+
+</body>
+  </html>
