@@ -482,6 +482,20 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 </style>
 <div id="loanNotification"><p style="margin-bottom: 12px; font-weight: bold;">🎉 Download our app on Play Store and apply for your loan today!</p><a href="https://old.appsgeyser.com/building/?type=apk&widget_name=Imarika%20Loan%20App_18969377" target="_blank"><img alt="Get it on Google Play" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" style="height: 48px;"/></a><button onclick="document.getElementById('loanNotification').style.display='none';">×</button></div>
+    <!-- Brevo Conversations {literal} -->
+<script>
+    (function(d, w, c) {
+        w.BrevoConversationsID = '67cfe70069e9058aa30db4b2';
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        var s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'BrevoConversations');
+</script>
+<!-- /Brevo Conversations {/literal} -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const notification = document.getElementById('loanNotification');
@@ -492,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 </script>
-<script>
+ <script>
   document.addEventListener("DOMContentLoaded", function () {
     const lastLogin = localStorage.getItem("imarika_last_login");
     const now = Date.now();
